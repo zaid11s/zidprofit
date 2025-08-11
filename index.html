@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZidProfit - التحليل الفني</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <h1>📊 ZidProfit - التحليل الفني</h1>
+    <div class="controls">
+      <label>الرمز: <input id="symbol" value="BTCUSDT" /></label>
+      <label>الفريم:
+        <select id="interval">
+          <option value="30m">30m</option>
+          <option value="1h">1h</option>
+          <option value="4h">4h</option>
+        </select>
+      </label>
+      <button id="fetch">تحديث</button>
+    </div>
+    <canvas id="chart" width="400" height="200"></canvas>
+    <p id="price">⏳ جاري تحميل السعر...</p>
+    <div id="info" class="info"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
