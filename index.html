@@ -11,6 +11,12 @@
         #chart { height: 500px; margin-top: 20px; }
     </style>
 </head>
+    <link rel="manifest" href="manifest.json">
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
+  }
+</script>
 <body>
     <div class="wrap">
         <h1>📊 ZidProfit - التحليل الفني</h1>
