@@ -17,3 +17,61 @@
   <div id="info" class="info"></div>
 </div>
 <!-- TradingView widget script remains same -->
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZidProfit - التحليل الفني</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        .wrap { max-width: 400px; margin: auto; }
+        button { background: green; color: white; padding: 8px 15px; border: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <h1>📊 ZidProfit - التحليل الفني</h1>
+        <div>
+            <label>الرمز: <input id="symbol" value="BTCUSDT"></label>
+            <label>الفريم:
+                <select id="interval">
+                    <option value="30m">30m</option>
+                    <option value="1h">1h</option>
+                    <option value="4h">4h</option>
+                </select>
+            </label>
+            <br><br>
+            <button id="fetch">تحديث</button>
+        </div>
+        <div id="result" style="margin-top:20px;">⏳ جاري تحميل السعر...</div>
+    </div>
+
+    <script>
+        function fetchPrice() {
+            const symbol = document.getElementById("symbol").value.toUpperCase();
+            const resultDiv = document.getElementById("result");
+
+            resultDiv.innerHTML = "⏳ جاري تحميل السعر...";
+            const url = `https://api.binance.com/api/v3/ticker/price?symbol=${symbol}`;
+
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) throw new Error("❌ فشل الاتصال بالسيرفر");
+                    return response.json();
+                })
+                .then(data => {
+                    resultDiv.innerHTML = `💰 السعر الحالي لـ ${symbol}: <b>${data.price}</b>`;
+                })
+                .catch(error => {
+                    resultDiv.innerHTML = "⚠️ خطأ: " + error.message;
+                });
+        }
+
+        document.getElementById("fetch").addEventListener("click", fetchPrice);
+
+        // تحميل السعر مباشرة عند فتح الصفحة
+        fetchPrice();
+    </script>
+</body>
+</html>
