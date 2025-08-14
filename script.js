@@ -1,2 +1,35 @@
-const ctx = document.getElementById('chart').getContext('2d');let chart;
-async function fetchData(){const symbol=document.getElementById('symbol').value.trim().toUpperCase()||'BTCUSDT';const interval=document.getElementById('interval').value||'30m';document.getElementById('price').textContent='⏳ جاري تحميل السعر...';try{const res=await fetch(`https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&limit=50`);const data=await res.json();if(!Array.isArray(data)){document.getElementById('info').textContent='خطأ في الرمز أو استجابة API';return;}const labels=data.map(c=>new Date(c[0]).toLocaleString());const closes=data.map(c=>parseFloat(c[4]));document.getElementById('price').textContent=`💰 آخر سعر: ${closes[closes.length-1]} USDT`;if(chart)chart.destroy();chart=new Chart(ctx,{type:'line',data:{labels,datasets:[{label:`${symbol} السعر`,data:closes,borderColor:'gold',backgroundColor:'rgba(255,215,0,0.15)',fill:true,tension:0.2}]},options:{scales:{x:{ticks:{color:'#000'}},y:{ticks:{color:'#000'}}}}});document.getElementById('info').textContent=`عرض ${closes.length} شمعات — فريم ${interval}`;}catch(e){console.error(e);document.getElementById('info').textContent='حدث خطأ في جلب البيانات.'}}document.getElementById('fetch').addEventListener('click',fetchData);fetchData();
+function loadChart(symbol, interval) {
+    document.getElementById("chart").innerHTML = "";
+
+    new TradingView.widget({
+        "container_id": "chart",
+        "width": "100%",
+        "height": 500,
+        "symbol": symbol,
+        "interval": interval,
+        "timezone": "Etc/UTC",
+        "theme": "light",
+        "style": "1",
+        "locale": "ar",
+        "toolbar_bg": "#f1f3f6",
+        "enable_publishing": false,
+        "allow_symbol_change": true
+    });
+
+    fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}`)
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("price").textContent = `💰 السعر الحالي لـ ${symbol}: ${parseFloat(data.price).toFixed(2)}$`;
+        })
+        .catch(() => {
+            document.getElementById("price").textContent = "❌ تعذر جلب السعر";
+        });
+}
+
+document.getElementById("updateChart").addEventListener("click", () => {
+    const symbol = document.getElementById("symbol").value.toUpperCase();
+    const interval = document.getElementById("interval").value;
+    loadChart(symbol, interval);
+});
+
+loadChart("BTCUSDT", "30");
