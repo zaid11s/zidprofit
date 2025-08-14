@@ -1,117 +1,51 @@
 <!DOCTYPE html>
-<html lang="ar">body {
-  font-family: Arial, sans-serif;
-  direction: rtl;
-  background: #1A1A2E;
-  color: #E0E0E0;
-  margin: 0;
-  padding: 20px;
-}
-.wrap {
-  max-width: 700px;
-  margin: auto;
-  background: #16213E;
-  padding: 20px;
-  border-radius: 12px;
-}
-h1 {
-  text-align: center;
-  color: #E94560;
-  margin-bottom: 16px;
-}
-.controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
-  margin-bottom: 16px;
-}
-.controls input,
-.controls select {
-  padding: 8px;
-  border-radius: 6px;
-  border: none;
-  background: #0F3460;
-  color: #E0E0E0;
-}
-#fetch {
-  background: #E94560;
-  color: white;
-  padding: 10px 18px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-#fetch:hover {
-  background: #903749;
-}
-#chart {
-  background: white;
-  border-radius: 10px;
-  margin-top: 20px;
-}
-.info {
-  margin-top: 12px;
-  color: #BBB;
-  text-align: center;
-}
-                </select>
-            </label>
-            <br><br>
-            <button id="fetch">تحديث</button>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZidProfit - التحليل الفني</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- أيقونات PWA -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+</head>
+<body>
+    <header>
+        <h1>📊 ZidProfit</h1>
+        <p>أدوات التحليل الفني للعملات الرقمية</p>
+    </header>
+
+    <main>
+        <div class="controls">
+            <label for="symbol">الرمز:</label>
+            <input type="text" id="symbol" value="BTCUSDT">
+
+            <label for="interval">الفريم:</label>
+            <select id="interval">
+                <option value="1">1 دقيقة</option>
+                <option value="5">5 دقائق</option>
+                <option value="15">15 دقيقة</option>
+                <option value="30" selected>30 دقيقة</option>
+                <option value="60">1 ساعة</option>
+                <option value="240">4 ساعات</option>
+                <option value="1D">يومي</option>
+            </select>
+
+            <button id="updateChart">🔄 تحديث</button>
         </div>
-        <div id="result" style="margin-top:20px;">⏳ جاري تحميل السعر...</div>
+
+        <div id="price" class="price-box">⏳ جاري التحميل...</div>
         <div id="chart"></div>
-    </div>
+    </main>
 
-    <!-- TradingView Widget -->
-    <script src="https://s3.tradingview.com/tv.js"></script>
+    <footer>
+        <p>© 2025 ZidProfit | جميع الحقوق محفوظة</p>
+    </footer>
 
-    <script>
-        function fetchPrice() {
-            const symbol = document.getElementById("symbol").value.toUpperCase();
-            const resultDiv = document.getElementById("result");
-
-            resultDiv.innerHTML = "⏳ جاري تحميل السعر...";
-            const url = `https://api.binance.com/api/v3/ticker/price?symbol=${symbol}`;
-
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) throw new Error("❌ فشل الاتصال بالسيرفر");
-                    return response.json();
-                })
-                .then(data => {
-                    resultDiv.innerHTML = `💰 السعر الحالي لـ ${symbol}: <b>${data.price}</b>`;
-                    loadChart(symbol);
-                })
-                .catch(error => {
-                    resultDiv.innerHTML = "⚠️ خطأ: " + error.message;
-                });
-        }
-
-        function loadChart(symbol) {
-            const interval = document.getElementById("interval").value;
-            new TradingView.widget({
-                "width": "100%",
-                "height": 500,
-                "symbol": `BINANCE:${symbol}`,
-                "interval": interval,
-                "timezone": "Etc/UTC",
-                "theme": "light",
-                "style": "1",
-                "locale": "ar",
-                "toolbar_bg": "#f1f3f6",
-                "enable_publishing": false,
-                "hide_top_toolbar": false,
-                "save_image": false,
-                "container_id": "chart"
-            });
-        }
-
-        document.getElementById("fetch").addEventListener("click", fetchPrice);
-
-        // تحميل السعر والرسم البياني عند فتح الصفحة
-        fetchPrice();
-    </script>
+    <!-- مكتبة TradingView -->
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
