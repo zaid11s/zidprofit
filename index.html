@@ -1,27 +1,60 @@
 <!DOCTYPE html>
-<html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZidProfit - التحليل الفني</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-        .wrap { max-width: 800px; margin: auto; }
-        button { background: green; color: white; padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer; }
-        #chart { height: 500px; margin-top: 20px; }
-    </style>
-</head>
-<body>
-    <div class="wrap">
-        <h1>📊 ZidProfit - التحليل الفني</h1>
-        <div>
-            <label>الرمز: <input id="symbol" value="BTCUSDT"></label>
-            <label>الفريم:
-                <select id="interval">
-                    <option value="30">30 دقيقة</option>
-                    <option value="60">ساعة</option>
-                    <option value="240">4 ساعات</option>
-                    <option value="D">يومي</option>
+<html lang="ar">body {
+  font-family: Arial, sans-serif;
+  direction: rtl;
+  background: #1A1A2E;
+  color: #E0E0E0;
+  margin: 0;
+  padding: 20px;
+}
+.wrap {
+  max-width: 700px;
+  margin: auto;
+  background: #16213E;
+  padding: 20px;
+  border-radius: 12px;
+}
+h1 {
+  text-align: center;
+  color: #E94560;
+  margin-bottom: 16px;
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.controls input,
+.controls select {
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  background: #0F3460;
+  color: #E0E0E0;
+}
+#fetch {
+  background: #E94560;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#fetch:hover {
+  background: #903749;
+}
+#chart {
+  background: white;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+.info {
+  margin-top: 12px;
+  color: #BBB;
+  text-align: center;
+}
                 </select>
             </label>
             <br><br>
