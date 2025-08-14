@@ -1,51 +1,99 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZidProfit - التحليل الفني</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ZidProfit - توصيات وتصفية العملات الرائجة</title>
+  <link rel="stylesheet" href="style.css" />
 
-    <!-- أيقونات PWA -->
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+  <!-- PWA (اختياري إن كنت أضفتها سابقًا) -->
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png" />
 </head>
 <body>
-    <header>
-        <h1>📊 ZidProfit</h1>
-        <p>أدوات التحليل الفني للعملات الرقمية</p>
-    </header>
+  <header>
+    <h1>📈 ZidProfit</h1>
+    <p>فلترة العملات الرائجة + توصيات دخول بثلاثة أهداف (تحديث كل 30 دقيقة)</p>
+  </header>
 
-    <main>
-        <div class="controls">
-            <label for="symbol">الرمز:</label>
-            <input type="text" id="symbol" value="BTCUSDT">
+  <main class="container">
+    <section class="controls">
+      <div>
+        <label>الرمز:</label>
+        <input id="symbol" value="BTCUSDT" />
+      </div>
+      <div>
+        <label>الفريم:</label>
+        <select id="interval">
+          <option value="1m">1m</option>
+          <option value="5m">5m</option>
+          <option value="15m">15m</option>
+          <option value="30m" selected>30m</option>
+          <option value="1h">1h</option>
+          <option value="4h">4h</option>
+          <option value="1d">1d</option>
+        </select>
+      </div>
+      <button id="btnUpdate">تحديث الآن</button>
+    </section>
 
-            <label for="interval">الفريم:</label>
-            <select id="interval">
-                <option value="1">1 دقيقة</option>
-                <option value="5">5 دقائق</option>
-                <option value="15">15 دقيقة</option>
-                <option value="30" selected>30 دقيقة</option>
-                <option value="60">1 ساعة</option>
-                <option value="240">4 ساعات</option>
-                <option value="1D">يومي</option>
-            </select>
+    <section class="status">
+      <div id="lastRun">آخر تحديث: —</div>
+      <div id="note">⏳ جاري التحميل…</div>
+    </section>
 
-            <button id="updateChart">🔄 تحديث</button>
+    <section class="grid">
+      <div class="card">
+        <h2>العملات الرائجة الآن</h2>
+        <p class="muted">أكبر حجم تداول/تغيّر خلال 24 ساعة (USDT فقط)</p>
+        <div class="table-wrap">
+          <table id="tblTrending">
+            <thead>
+              <tr>
+                <th>الرمز</th>
+                <th>التغيّر %</th>
+                <th>الحجم (USDT)</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
         </div>
+      </div>
 
-        <div id="price" class="price-box">⏳ جاري التحميل...</div>
-        <div id="chart"></div>
-    </main>
+      <div class="card">
+        <h2>توصيات شراء (3 أهداف)</h2>
+        <p class="muted">شرط: تقاطع EMA9 فوق EMA21 + RSI(14) بين 40–65 والسعر أعلى EMA21</p>
+        <div class="table-wrap">
+          <table id="tblSignals">
+            <thead>
+              <tr>
+                <th>الرمز</th>
+                <th>دخول</th>
+                <th>TP1</th>
+                <th>TP2</th>
+                <th>TP3</th>
+                <th>وقف</th>
+                <th>سبب الإشارة</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="muted small">ملاحظة: هذه ليست نصيحة مالية. اختبر قبل الاستخدام الفعلي.</div>
+      </div>
+    </section>
 
-    <footer>
-        <p>© 2025 ZidProfit | جميع الحقوق محفوظة</p>
-    </footer>
+    <section class="card">
+      <h2>الشارت</h2>
+      <div id="chart" style="height:520px;"></div>
+    </section>
+  </main>
 
-    <!-- مكتبة TradingView -->
-    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-    <script src="script.js"></script>
+  <footer>© 2025 ZidProfit</footer>
+
+  <!-- TradingView chart lib -->
+  <script src="https://s3.tradingview.com/tv.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
