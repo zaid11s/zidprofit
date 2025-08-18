@@ -1,4 +1,59 @@
 <!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZidProfit توصيات التداول</title>
+  
+  <!-- أيقونات PWA -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" sizes="192x192" href="icon-192.png">
+  <link rel="icon" sizes="512x512" href="icon-512.png">
+  
+  <!-- OneSignal SDK -->
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+  <script>
+    window.OneSignal = window.OneSignal || [];
+    OneSignal.push(function() {
+      OneSignal.init({
+        appId: "36dcc082-8d97-474d-9587-22fe21dec8b2", // ← App ID الخاص بك
+        notifyButton: {
+          enable: true,
+        },
+      });
+    });
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0d1117;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #00ffae;
+    }
+    .signal {
+      background: #161b22;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 10px 0;
+      box-shadow: 0 0 10px rgba(0,255,174,0.3);
+    }
+  </style>
+</head>
+<body>
+  <h1>📊 ZidProfit - توصيات التداول</h1>
+  <p>✅ ستصلك إشعارات تلقائية عند ظهور إشارات شراء قوية.</p>
+
+  <div class="signal">
+    <h2>🚀 لا توجد إشارات مطابقة الآن</h2>
+    <p>📢 انتظر الإشعار القادم</p>
+  </div>
+</body>
+</html><!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
