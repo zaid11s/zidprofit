@@ -96,4 +96,117 @@
   <script src="https://s3.tradingview.com/tv.js"></script>
   <script src="script.js"></script>
 </body>
+</html><!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ZidProfit - توصيات ذكية</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png" />
+</head>
+<body>
+  <header>
+    <h1>📈 ZidProfit</h1>
+    <p>تصفية العملات الرائجة + توصيات دخول بثلاثة أهداف (تحديث كل 30 دقيقة)</p>
+  </header>
+
+  <main class="container">
+    <section class="controls">
+      <div>
+        <label>الفريم:</label>
+        <select id="interval">
+          <option value="15m">15m</option>
+          <option value="30m" selected>30m</option>
+          <option value="1h">1h</option>
+          <option value="4h">4h</option>
+        </select>
+      </div>
+      <div>
+        <label>عدد العملات المفحوصة:</label>
+        <select id="scanCount">
+          <option>20</option><option>40</option><option selected>60</option><option>100</option>
+        </select>
+      </div>
+      <button id="btnUpdate">🔄 تحديث الآن</button>
+    </section>
+
+    <section class="status">
+      <div id="lastRun">آخر تحديث: —</div>
+      <div id="note">⏳ جارِ الفحص…</div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>العملات الرائجة الآن</h2>
+        <p class="muted">USDT فقط • أعلى حجم/تغيّر خلال 24 ساعة</p>
+        <div class="table-wrap">
+          <table id="tblTrending">
+            <thead>
+              <tr><th>الرمز</th><th>التغيّر %</th><th>الحجم (USDT)</th><th>زخم</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>توصيات شراء (3 أهداف)</h2>
+        <p class="muted small">
+          شرط “مثالي”: تقاطع EMA9 فوق EMA21 + RSI(14) بين 40–65 والسعر أعلى EMA21.<br/>
+          يتم حساب TP1/TP2/TP3 ووقف الخسارة تلقائيًا.
+        </p>
+        <div class="table-wrap">
+          <table id="tblSignals">
+            <thead>
+              <tr>
+                <th>الرمز</th><th>دخول</th><th>TP1</th><th>TP2</th><th>TP3</th><th>وقف</th><th>الوقت</th><th>السبب</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="muted small">ليست نصيحة مالية. استخدم إدارة مخاطر.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>الشارت</h2>
+      <div id="chart" style="height:520px;"></div>
+    </section>
+  </main>
+
+  <footer>© 2025 ZidProfit</footer>
+
+  <!-- صوت تنبيه (Base64) -->
+  <audio id="ding" preload="auto">
+    <source src="data:audio/mp3;base64,//uQZAAAAAAAAAAAAAAAAAAAA..." type="audio/mp3">
+  </audio>
+
+  <!-- TradingView -->
+  <script src="https://s3.tradingview.com/tv.js"></script>
+
+  <!-- OneSignal (اختياري: استبدل APP_ID لتفعيل Push حقيقي) -->
+  <script>
+    /* ضع App ID هنا لو عندك حساب OneSignal
+    window.OneSignal = window.OneSignal || [];
+    OneSignal.push(function() {
+      OneSignal.init({ appId: "ONESIGNAL_APP_ID" });
+    });
+    */
+  </script>
+
+  <script src="script.js"></script>
+
+  <!-- تسجيل Service Worker للـ PWA والإشعارات داخل المتصفح -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+  </script>
+</body>
 </html>
