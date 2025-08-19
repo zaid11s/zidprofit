@@ -1,57 +1,0 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZidProfit 📈</title>
-  <link rel="stylesheet" href="style.css">
-
-  <!-- OneSignal -->
-  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-  <script>
-    window.OneSignal = window.OneSignal || [];
-    OneSignal.push(function() {
-      OneSignal.init({
-        appId: "36dcc082-8d97-474d-9587-22fe21dec8b2",
-      });
-    });
-  </script>
-</head>
-<body>
-  <header>
-    <h1>ZidProfit 📈</h1>
-    <p>فلترة العملات الرائجة + توصيات دخول بثلاثة أهداف (تحديث كل 30 دقيقة)</p>
-  </header>
-
-  <main>
-    <section id="filter">
-      <label for="symbol">الرمز:</label>
-      <input type="text" id="symbol" value="BTCUSDT">
-      <label for="timeframe">الفريم:</label>
-      <select id="timeframe">
-        <option value="30m">30m</option>
-        <option value="1h">1h</option>
-        <option value="4h">4h</option>
-      </select>
-      <button id="update">تحديث الآن</button>
-      <p id="last-update">آخر تحديث: جاري التحميل…</p>
-    </section>
-
-    <section id="trending">
-      <h2>العملات الرائجة الآن</h2>
-      <div id="trending-list">جاري التحميل...</div>
-    </section>
-
-    <section id="signals">
-      <h2>توصيات شراء (3 أهداف)</h2>
-      <div id="signals-list">لا توجد توصيات حالياً...</div>
-    </section>
-  </main>
-
-  <footer>
-    <p>⚠️ هذه ليست نصيحة مالية — جرب قبل الاستخدام الفعلي.</p>
-  </footer>
-
-  <script src="app.js"></script>
-</body>
-</html>
