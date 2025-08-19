@@ -1,4 +1,46 @@
 <!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZidProfit 📈</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <!-- أيقونات Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>ZidProfit 📊</h1>
+    <p>فلترة العملات الرائجة + توصيات دخول بثلاثة أهداف</p>
+  </header>
+
+  <main>
+    <!-- العملات الرائجة -->
+    <section id="trending-section" class="active">
+      <h2>💹 العملات الرائجة الآن</h2>
+      <div id="trending">⏳ جاري التحميل...</div>
+    </section>
+
+    <!-- التوصيات -->
+    <section id="signals-section">
+      <h2>📌 توصيات الشراء (3 أهداف)</h2>
+      <div id="signals">⏳ جاري التحميل...</div>
+    </section>
+  </main>
+
+  <!-- ✅ شريط سفلي بأيقونات -->
+  <nav class="bottom-bar">
+    <button onclick="showSection('trending-section')" id="btn-trending">
+      <i class="fa-solid fa-chart-line"></i><br>العملات
+    </button>
+    <button onclick="showSection('signals-section')" id="btn-signals">
+      <i class="fa-solid fa-bullseye"></i><br>التوصيات
+    </button>
+  </nav>
+</body>
+</html><!DOCTYPE html>
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
