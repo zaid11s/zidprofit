@@ -1,380 +1,43 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZidProfit 📈</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="manifest" href="manifest.json">
-  <!-- أيقونات Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <script src="script.js" defer></script>
-</head>
-<body>
-  <header>
-    <h1>ZidProfit 📊</h1>
-    <p>فلترة العملات الرائجة + توصيات دخول بثلاثة أهداف</p>
-  </header>
-
-  <main>
-    <!-- العملات الرائجة -->
-    <section id="trending-section" class="active">
-      <h2>💹 العملات الرائجة الآن</h2>
-      <div id="trending">⏳ جاري التحميل...</div>
-    </section>
-
-    <!-- التوصيات -->
-    <section id="signals-section">
-      <h2>📌 توصيات الشراء (3 أهداف)</h2>
-      <div id="signals">⏳ جاري التحميل...</div>
-    </section>
-  </main>
-
-  <!-- ✅ شريط سفلي بأيقونات -->
-  <nav class="bottom-bar">
-    <button onclick="showSection('trending-section')" id="btn-trending">
-      <i class="fa-solid fa-chart-line"></i><br>العملات
-    </button>
-    <button onclick="showSection('signals-section')" id="btn-signals">
-      <i class="fa-solid fa-bullseye"></i><br>التوصيات
-    </button>
-  </nav>
-</body>
-</html><!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZidProfit 📈</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZidProfit توصيات</title>
+  <link rel="stylesheet" href="style.css" />
 
-  <!-- OneSignal -->
-  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-  <script>
-    window.OneSignal = window.OneSignal || [];
-    OneSignal.push(function() {
-      OneSignal.init({
-        appId: "36dcc082-8d97-474d-9587-22fe21dec8b2",
-      });
-    });
-  </script>
-</head>
-<body>
-  <header>
-    <h1>ZidProfit 📈</h1>
-    <p>فلترة العملات الرائجة + توصيات دخول بثلاثة أهداف (تحديث كل 30 دقيقة)</p>
-  </header>
-
-  <main>
-    <section id="filter">
-      <label for="symbol">الرمز:</label>
-      <input type="text" id="symbol" value="BTCUSDT">
-      <label for="timeframe">الفريم:</label>
-      <select id="timeframe">
-        <option value="30m">30m</option>
-        <option value="1h">1h</option>
-        <option value="4h">4h</option>
-      </select>
-      <button id="update">تحديث الآن</button>
-      <p id="last-update">آخر تحديث: جاري التحميل…</p>
-    </section>
-
-    <section id="trending">
-      <h2>العملات الرائجة الآن</h2>
-      <div id="trending-list">جاري التحميل...</div>
-    </section>
-
-    <section id="signals">
-      <h2>توصيات شراء (3 أهداف)</h2>
-      <div id="signals-list">لا توجد توصيات حالياً...</div>
-    </section>
-  </main>
-
-  <footer>
-    <p>⚠️ هذه ليست نصيحة مالية — جرب قبل الاستخدام الفعلي.</p>
-  </footer>
-
-  <script src="app.js"></script>
-</body>
-</html><!DOCTYPE html>
-<html lang="ar">
-<head>
-  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "36dcc082-8d97-474d-9587-22fe21dec8b2",
-      safari_web_id: "web.onesignal.auto.1560ab56-4a76-4fcb-b8cd-3f5423fe1d6c",
-      notifyButton: {
-        enable: true,
-      },
-    });
-  });
-</script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZidProfit توصيات التداول</title>
-  
-  <!-- أيقونات PWA -->
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" sizes="192x192" href="icon-192.png">
-  <link rel="icon" sizes="512x512" href="icon-512.png">
-  
   <!-- OneSignal SDK -->
   <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
   <script>
     window.OneSignal = window.OneSignal || [];
     OneSignal.push(function() {
       OneSignal.init({
-        appId: "36dcc082-8d97-474d-9587-22fe21dec8b2", // ← App ID الخاص بك
-        notifyButton: {
-          enable: true,
-        },
+        appId: "36dcc082-8d97-474d-9587-22fe21dec8b2", // ID تبعك
       });
     });
   </script>
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #0d1117;
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-    }
-    h1 {
-      color: #00ffae;
-    }
-    .signal {
-      background: #161b22;
-      padding: 15px;
-      border-radius: 10px;
-      margin: 10px 0;
-      box-shadow: 0 0 10px rgba(0,255,174,0.3);
-    }
-  </style>
-</head>
-<body>
-  <h1>📊 ZidProfit - توصيات التداول</h1>
-  <p>✅ ستصلك إشعارات تلقائية عند ظهور إشارات شراء قوية.</p>
-
-  <div class="signal">
-    <h2>🚀 لا توجد إشارات مطابقة الآن</h2>
-    <p>📢 انتظر الإشعار القادم</p>
-  </div>
-</body>
-</html><!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ZidProfit - توصيات وتصفية العملات الرائجة</title>
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- PWA (اختياري إن كنت أضفتها سابقًا) -->
-  <link rel="manifest" href="manifest.json" />
-  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
-  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png" />
 </head>
 <body>
   <header>
-    <h1>📈 ZidProfit</h1>
-    <p>فلترة العملات الرائجة + توصيات دخول بثلاثة أهداف (تحديث كل 30 دقيقة)</p>
+    <h1>🚀 ZidProfit توصيات العملات</h1>
   </header>
 
-  <main class="container">
-    <section class="controls">
-      <div>
-        <label>الرمز:</label>
-        <input id="symbol" value="BTCUSDT" />
-      </div>
-      <div>
-        <label>الفريم:</label>
-        <select id="interval">
-          <option value="1m">1m</option>
-          <option value="5m">5m</option>
-          <option value="15m">15m</option>
-          <option value="30m" selected>30m</option>
-          <option value="1h">1h</option>
-          <option value="4h">4h</option>
-          <option value="1d">1d</option>
-        </select>
-      </div>
-      <button id="btnUpdate">تحديث الآن</button>
+  <main>
+    <section>
+      <h2>📊 العملات الرائجة</h2>
+      <div id="trending"></div>
     </section>
 
-    <section class="status">
-      <div id="lastRun">آخر تحديث: —</div>
-      <div id="note">⏳ جاري التحميل…</div>
-    </section>
-
-    <section class="grid">
-      <div class="card">
-        <h2>العملات الرائجة الآن</h2>
-        <p class="muted">أكبر حجم تداول/تغيّر خلال 24 ساعة (USDT فقط)</p>
-        <div class="table-wrap">
-          <table id="tblTrending">
-            <thead>
-              <tr>
-                <th>الرمز</th>
-                <th>التغيّر %</th>
-                <th>الحجم (USDT)</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="card">
-        <h2>توصيات شراء (3 أهداف)</h2>
-        <p class="muted">شرط: تقاطع EMA9 فوق EMA21 + RSI(14) بين 40–65 والسعر أعلى EMA21</p>
-        <div class="table-wrap">
-          <table id="tblSignals">
-            <thead>
-              <tr>
-                <th>الرمز</th>
-                <th>دخول</th>
-                <th>TP1</th>
-                <th>TP2</th>
-                <th>TP3</th>
-                <th>وقف</th>
-                <th>سبب الإشارة</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
-        <div class="muted small">ملاحظة: هذه ليست نصيحة مالية. اختبر قبل الاستخدام الفعلي.</div>
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>الشارت</h2>
-      <div id="chart" style="height:520px;"></div>
+    <section>
+      <h2>💡 التوصيات</h2>
+      <div id="signals"></div>
     </section>
   </main>
 
-  <footer>© 2025 ZidProfit</footer>
-
-  <!-- TradingView chart lib -->
-  <script src="https://s3.tradingview.com/tv.js"></script>
-  <script src="script.js"></script>
-</body>
-</html><!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ZidProfit - توصيات ذكية</title>
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- PWA -->
-  <link rel="manifest" href="manifest.json" />
-  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
-  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png" />
-</head>
-<body>
-  <header>
-    <h1>📈 ZidProfit</h1>
-    <p>تصفية العملات الرائجة + توصيات دخول بثلاثة أهداف (تحديث كل 30 دقيقة)</p>
-  </header>
-
-  <main class="container">
-    <section class="controls">
-      <div>
-        <label>الفريم:</label>
-        <select id="interval">
-          <option value="15m">15m</option>
-          <option value="30m" selected>30m</option>
-          <option value="1h">1h</option>
-          <option value="4h">4h</option>
-        </select>
-      </div>
-      <div>
-        <label>عدد العملات المفحوصة:</label>
-        <select id="scanCount">
-          <option>20</option><option>40</option><option selected>60</option><option>100</option>
-        </select>
-      </div>
-      <button id="btnUpdate">🔄 تحديث الآن</button>
-    </section>
-
-    <section class="status">
-      <div id="lastRun">آخر تحديث: —</div>
-      <div id="note">⏳ جارِ الفحص…</div>
-    </section>
-
-    <section class="grid">
-      <div class="card">
-        <h2>العملات الرائجة الآن</h2>
-        <p class="muted">USDT فقط • أعلى حجم/تغيّر خلال 24 ساعة</p>
-        <div class="table-wrap">
-          <table id="tblTrending">
-            <thead>
-              <tr><th>الرمز</th><th>التغيّر %</th><th>الحجم (USDT)</th><th>زخم</th></tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="card">
-        <h2>توصيات شراء (3 أهداف)</h2>
-        <p class="muted small">
-          شرط “مثالي”: تقاطع EMA9 فوق EMA21 + RSI(14) بين 40–65 والسعر أعلى EMA21.<br/>
-          يتم حساب TP1/TP2/TP3 ووقف الخسارة تلقائيًا.
-        </p>
-        <div class="table-wrap">
-          <table id="tblSignals">
-            <thead>
-              <tr>
-                <th>الرمز</th><th>دخول</th><th>TP1</th><th>TP2</th><th>TP3</th><th>وقف</th><th>الوقت</th><th>السبب</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
-        <div class="muted small">ليست نصيحة مالية. استخدم إدارة مخاطر.</div>
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>الشارت</h2>
-      <div id="chart" style="height:520px;"></div>
-    </section>
-  </main>
-
-  <footer>© 2025 ZidProfit</footer>
-
-  <!-- صوت تنبيه (Base64) -->
-  <!-- ملف صوت للتنبيه -->
-<audio id="alertSound" src="https://www.soundjay.com/buttons/sounds/beep-07.mp3" preload="auto"></audio>
-  <audio id="ding" preload="auto">
-    <source src="data:audio/mp3;base64,//uQZAAAAAAAAAAAAAAAAAAAA..." type="audio/mp3">
-  </audio>
-
-  <!-- TradingView -->
-  <script src="https://s3.tradingview.com/tv.js"></script>
-
-  <!-- OneSignal (36dcc082-8d97-474d-9587-22fe21dec8b2 -->
-  <script>
-    /* ضع App ID 36dcc082-8d97-474d-9587-22fe21dec8b2 OneSignal
-    window.OneSignal = window.OneSignal || [];
-    OneSignal.push(function() {
-      OneSignal.init({ appId: "ONESIGNAL_APP_ID" });
-    });
-    */
-  </script>
+  <footer>
+    <p>© 2025 ZidProfit - جميع الحقوق محفوظة</p>
+  </footer>
 
   <script src="script.js"></script>
-
-  <!-- تسجيل Service Worker للـ PWA والإشعارات داخل المتصفح -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js');
-    }
-  </script>
 </body>
 </html>
