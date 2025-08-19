@@ -1,4 +1,59 @@
-// ====== إعدادات عامة ======
+// عرض القسم المطلوب
+function showSection(id) {
+  document.querySelectorAll("section").forEach(sec => sec.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+
+  // تفعيل الزر النشط
+  document.querySelectorAll(".bottom-bar button").forEach(btn => btn.classList.remove("active"));
+  if (id === "trending-section") {
+    document.getElementById("btn-trending").classList.add("active");
+  } else {
+    document.getElementById("btn-signals").classList.add("active");
+  }
+}
+
+// تحميل العملات الرائجة (محاكاة)
+function loadTrending() {
+  const trending = document.getElementById("trending");
+  trending.innerHTML = "<p>🔄 تحديث البيانات...</p>";
+
+  setTimeout(() => {
+    trending.innerHTML = `
+      <table>
+        <tr><th>العملة</th><th>التغيير %</th><th>الحجم</th></tr>
+        <tr><td>BTCUSDT</td><td style="color:lime">+2.5%</td><td>1.2B</td></tr>
+        <tr><td>ETHUSDT</td><td style="color:lime">+3.1%</td><td>850M</td></tr>
+      </table>
+    `;
+  }, 1000);
+}
+
+// تحميل التوصيات (محاكاة)
+function loadSignals() {
+  const signals = document.getElementById("signals");
+  signals.innerHTML = "<p>🔄 تحديث التوصيات...</p>";
+
+  setTimeout(() => {
+    signals.innerHTML = `
+      <table>
+        <tr>
+          <th>الرمز</th><th>دخول</th><th>TP1</th><th>TP2</th><th>TP3</th><th>وقف</th>
+        </tr>
+        <tr>
+          <td>BTCUSDT</td><td>26000</td><td>26200</td><td>26500</td><td>27000</td><td>25500</td>
+        </tr>
+        <tr>
+          <td>ETHUSDT</td><td>1800</td><td>1820</td><td>1850</td><td>1900</td><td>1750</td>
+        </tr>
+      </table>
+    `;
+  }, 1200);
+}
+
+// أول تشغيل
+showSection("trending-section");
+loadTrending();
+loadSignals();// ====== إعدادات عامة ======
 const API = "https://api.binance.com";
 const DEFAULT_INTERVAL = "30m";   // تحديث كل 30 دقيقة
 const SCAN_COUNT = 20;            // نفحص أعلى 20 عملة رائجة
