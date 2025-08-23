@@ -1,43 +1,89 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ZidProfit توصيات</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ZidProfit 📈 توصيات سريعة</title>
 
-  <!-- OneSignal SDK -->
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" sizes="192x192" href="icon-192.png" />
+  <link rel="icon" sizes="512x512" href="icon-512.png" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- OneSignal Web Push -->
   <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
   <script>
+    // استخدمنا الـ App ID الذي أعطيتني إياه سابقًا
     window.OneSignal = window.OneSignal || [];
-    OneSignal.push(function() {
+    OneSignal.push(function () {
       OneSignal.init({
-        appId: "36dcc082-8d97-474d-9587-22fe21dec8b2", // ID تبعك
+        appId: "36dcc082-8d97-474d-9587-22fe21dec8b2",
+        notifyButton: { enable: true },
       });
     });
   </script>
 </head>
 <body>
   <header>
-    <h1>🚀 ZidProfit توصيات العملات</h1>
+    <h1>ZidProfit 📊</h1>
+    <p>العملات الرائجة + توصيات سريعة بثلاثة أهداف – تحديث تلقائي كل 30 دقيقة</p>
   </header>
 
   <main>
-    <section>
-      <h2>📊 العملات الرائجة</h2>
-      <div id="trending"></div>
+    <section id="trending-section" class="active">
+      <h2>💹 العملات الرائجة الآن</h2>
+      <div class="toolbar">
+        <label>عدد العملات:</label>
+        <select id="scanCount">
+          <option>20</option><option>40</option><option selected>60</option><option>100</option>
+        </select>
+        <button id="refreshBtn">🔄 تحديث الآن</button>
+        <span id="lastRun">آخر تحديث: —</span>
+      </div>
+      <div id="trending" class="card">⏳ جاري التحميل…</div>
     </section>
 
-    <section>
-      <h2>💡 التوصيات</h2>
-      <div id="signals"></div>
+    <section id="signals-section">
+      <h2>📌 توصيات الشراء (3 أهداف)</h2>
+      <div class="toolbar">
+        <label>الفريم:</label>
+        <select id="interval">
+          <option value="15m">15m</option>
+          <option value="30m" selected>30m</option>
+          <option value="1h">1h</option>
+          <option value="4h">4h</option>
+        </select>
+        <span class="muted small">شرط مثالي: EMA9>EMA21 + RSI بين 40–65</span>
+      </div>
+      <div id="signals" class="card">⏳ جارِ الفحص…</div>
+      <div class="muted small">⚠️ ليست نصيحة مالية. استخدم وقف الخسارة.</div>
     </section>
   </main>
 
-  <footer>
-    <p>© 2025 ZidProfit - جميع الحقوق محفوظة</p>
-  </footer>
+  <!-- شريط سفلي -->
+  <nav class="bottom-bar">
+    <button onclick="showSection('trending-section')" id="btn-trending" class="active">
+      <i class="fa-solid fa-chart-line"></i><br>العملات
+    </button>
+    <button onclick="showSection('signals-section')" id="btn-signals">
+      <i class="fa-solid fa-bullseye"></i><br>التوصيات
+    </button>
+  </nav>
+
+  <!-- صوت التنبيه -->
+  <audio id="alertSound"
+         src="https://www.soundjay.com/buttons/sounds/beep-07.mp3"
+         preload="auto"></audio>
 
   <script src="script.js"></script>
+
+  <!-- PWA Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+  </script>
 </body>
 </html>
