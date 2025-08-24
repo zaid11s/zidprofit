@@ -1,50 +1,101 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZidProfit</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-  <script>
-    window.OneSignal = window.OneSignal || [];
-    OneSignal.push(function() {
-      OneSignal.init({
-        appId:<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "7b640974-f457-417d-a04c-fe82340664d0",
-    });
-  });
-</script> "l" 
-      });
-    });
-  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZidProfit توصيات</title>
   <style>
-    body { font-family: "Cairo", sans-serif; background:#0d1117; color:#fff; text-align:center; }
-    header { padding: 15px; background:#161b22; font-size: 18px; font-weight:bold; }
-    #signals { margin: 20px; padding: 20px; border-radius: 12px; background:#1e242f; font-size:16px; }
-    footer { position:fixed; bottom:0; left:0; right:0; display:flex; justify-content:space-around; background:#161b22; padding:10px; }
-    footer button { background:none; border:none; color:#fff; font-size:16px; cursor:pointer; }
-    .loading { color: #aaa; font-size:14px; }
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f7f7f7;
+      color: #222;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #f0b90b;
+      color: #fff;
+      padding: 1rem;
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+    .section {
+      margin: 1rem;
+      padding: 1rem;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #f0b90b;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .btn:hover {
+      background: #d9a60b;
+    }
   </style>
 </head>
 <body>
+  <header>🚀 ZidProfit - توصيات وتحليل العملات</header>
 
-  <header>🚀 ZidProfit | توصيات العملات</header>
+  <div class="section">
+    <h2>📊 توصيات اليوم</h2>
+    <p id="signals">جارِ تحميل التوصيات...</p>
+  </div>
 
-  <main>
-    <h2>📌 توصيات الشراء (3 أهداف)</h2>
-    <div id="signals" class="loading">⏳ جاري التحميل...</div>
-  </main>
+  <div class="section">
+    <h2>🔥 العملات الرائجة</h2>
+    <p id="trending">جارِ تحميل العملات...</p>
+  </div>
 
-  <footer>
-    <button onclick="alert('هذه التوصيات')">📊 التوصيات</button>
-    <button onclick="alert('العملات الرائجة قريباً')">💹 العملات</button>
-  </footer>
+  <div class="section">
+    <button class="btn" onclick="subscribe()">تفعيل الإشعارات</button>
+  </div>
 
-  <script src="script.js"></script>
+  <!-- OneSignal SDK -->
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+  <script>
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(async function(OneSignal) {
+      await OneSignal.init({
+        appId: "7b640974-f457-417d-a04c-fe82340664d0", // App ID الخاص بك
+      });
+
+      // ✅ تنبيه تجريبي عند فتح الموقع
+      OneSignal.Notifications.showNotification("👋 أهلاً بك في ZidProfit!", {
+        body: "سيتم إرسال توصيات العملات هنا.",
+        icon: "icon-192.png"
+      });
+    });
+
+    // زر لتفعيل الاشتراك
+    function subscribe() {
+      window.OneSignalDeferred.push(async function(OneSignal) {
+        await OneSignal.Notifications.requestPermission();
+        alert("تم تفعيل الإشعارات ✅");
+      });
+    }
+
+    // ⚡ محاكاة توصيات (لاحقاً نربط مع Binance)
+    const signals = [
+      "🚀 شراء BTC عند 27000 - الأهداف: 27200 / 27500 / 28000",
+      "🔥 شراء ETH عند 1700 - الأهداف: 1720 / 1750 / 1800",
+      "⚡ شراء BNB عند 220 - الأهداف: 225 / 230 / 240"
+    ];
+
+    document.getElementById("signals").innerText = signals.join("\n");
+
+    // عملات رائجة (تجريبية)
+    const trending = ["BTC", "ETH", "BNB", "SOL", "XRP"];
+    document.getElementById("trending").innerText = trending.join(" | ");
+  </script>
 </body>
 </html>
