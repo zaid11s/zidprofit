@@ -1,89 +1,50 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ZidProfit 📈 توصيات سريعة</title>
-
-  <link rel="manifest" href="manifest.json" />
-  <link rel="icon" sizes="192x192" href="icon-192.png" />
-  <link rel="icon" sizes="512x512" href="icon-512.png" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-
-  <!-- OneSignal Web Push -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZidProfit</title>
+  <link rel="stylesheet" href="style.css">
   <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
   <script>
-    // استخدمنا الـ App ID الذي أعطيتني إياه سابقًا
     window.OneSignal = window.OneSignal || [];
-    OneSignal.push(function () {
+    OneSignal.push(function() {
       OneSignal.init({
-        appId: "36dcc082-8d97-474d-9587-22fe21dec8b2",
-        notifyButton: { enable: true },
+        appId:<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "7b640974-f457-417d-a04c-fe82340664d0",
+    });
+  });
+</script> "l" 
       });
     });
   </script>
+  <style>
+    body { font-family: "Cairo", sans-serif; background:#0d1117; color:#fff; text-align:center; }
+    header { padding: 15px; background:#161b22; font-size: 18px; font-weight:bold; }
+    #signals { margin: 20px; padding: 20px; border-radius: 12px; background:#1e242f; font-size:16px; }
+    footer { position:fixed; bottom:0; left:0; right:0; display:flex; justify-content:space-around; background:#161b22; padding:10px; }
+    footer button { background:none; border:none; color:#fff; font-size:16px; cursor:pointer; }
+    .loading { color: #aaa; font-size:14px; }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>ZidProfit 📊</h1>
-    <p>العملات الرائجة + توصيات سريعة بثلاثة أهداف – تحديث تلقائي كل 30 دقيقة</p>
-  </header>
+
+  <header>🚀 ZidProfit | توصيات العملات</header>
 
   <main>
-    <section id="trending-section" class="active">
-      <h2>💹 العملات الرائجة الآن</h2>
-      <div class="toolbar">
-        <label>عدد العملات:</label>
-        <select id="scanCount">
-          <option>20</option><option>40</option><option selected>60</option><option>100</option>
-        </select>
-        <button id="refreshBtn">🔄 تحديث الآن</button>
-        <span id="lastRun">آخر تحديث: —</span>
-      </div>
-      <div id="trending" class="card">⏳ جاري التحميل…</div>
-    </section>
-
-    <section id="signals-section">
-      <h2>📌 توصيات الشراء (3 أهداف)</h2>
-      <div class="toolbar">
-        <label>الفريم:</label>
-        <select id="interval">
-          <option value="15m">15m</option>
-          <option value="30m" selected>30m</option>
-          <option value="1h">1h</option>
-          <option value="4h">4h</option>
-        </select>
-        <span class="muted small">شرط مثالي: EMA9>EMA21 + RSI بين 40–65</span>
-      </div>
-      <div id="signals" class="card">⏳ جارِ الفحص…</div>
-      <div class="muted small">⚠️ ليست نصيحة مالية. استخدم وقف الخسارة.</div>
-    </section>
+    <h2>📌 توصيات الشراء (3 أهداف)</h2>
+    <div id="signals" class="loading">⏳ جاري التحميل...</div>
   </main>
 
-  <!-- شريط سفلي -->
-  <nav class="bottom-bar">
-    <button onclick="showSection('trending-section')" id="btn-trending" class="active">
-      <i class="fa-solid fa-chart-line"></i><br>العملات
-    </button>
-    <button onclick="showSection('signals-section')" id="btn-signals">
-      <i class="fa-solid fa-bullseye"></i><br>التوصيات
-    </button>
-  </nav>
-
-  <!-- صوت التنبيه -->
-  <audio id="alertSound"
-         src="https://www.soundjay.com/buttons/sounds/beep-07.mp3"
-         preload="auto"></audio>
+  <footer>
+    <button onclick="alert('هذه التوصيات')">📊 التوصيات</button>
+    <button onclick="alert('العملات الرائجة قريباً')">💹 العملات</button>
+  </footer>
 
   <script src="script.js"></script>
-
-  <!-- PWA Service Worker -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js');
-    }
-  </script>
 </body>
 </html>
