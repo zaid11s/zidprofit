@@ -1,141 +1,145 @@
 <!DOCTYPE html>
 <html lang="ar">
-...
-  <!-- باقي محتوى صفحتك هنا -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZidProfit - توصيات</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header {
+      background: #2d89ef;
+      color: white;
+      padding: 15px;
+      font-size: 20px;
+    }
+    .card {
+      background: white;
+      width: 90%;
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      text-align: right;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: right;
+    }
+    li {
+      background: #f9f9f9;
+      padding: 10px;
+      margin-bottom: 8px;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+    button {
+      background: #2d89ef;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    button:hover {
+      background: #1b5fbf;
+    }
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #222;
+      color: white;
+      padding: 10px;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-around;
+    }
+  </style>
+</head>
+<body>
+  <header>🚀 توصيات ZidProfit</header>
+
+  <div class="card">
+    <h3>📩 آخر 5 توصيات</h3>
+    <ul id="signalsList">
+      <li>⏳ لا توجد توصيات بعد...</li>
+    </ul>
+  </div>
+
+  <button onclick="sendTradeSignal()">إرسال توصية تجريبية</button>
+
+  <footer>
+    <span>🔥 BTC  26100$</span>
+    <span>📈 ETH  1650$</span>
+    <span>💎 XRP  0.52$</span>
+  </footer>
 
   <!-- سكربت البوت -->
   <script>
     const BOT_TOKEN = "8173854325:AAErmQqCdsLA4oo953II_NKhnGKmq5219zI"; 
     const CHAT_ID = "552699259";  
 
-    // دالة إرسال إشعار
-    function sendTelegramNotification(message) {
-      fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          chat_id: CHAT_ID,
-          text: message
-        })
-      })
-      .then(res => res.json())
-      .then(data => console.log("📨 تم الإرسال:", data))
-      .catch(err => console.error("⚠️ خطأ:", err));
+    const signalsList = document.getElementById("signalsList");
+
+    async function sendTelegramNotification(message) {
+      try {
+        const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: message
+          })
+        });
+        const data = await res.json();
+        console.log("📨 الرد من تليجرام:", data);
+
+        if (data.ok) {
+          addSignalToList(message);
+        } else {
+          alert("⚠️ خطأ: " + JSON.stringify(data));
+        }
+      } catch (err) {
+        console.error("⚠️ مشكلة:", err);
+        alert("🚨 لم يتم الإرسال. تحقق من الاتصال أو التوكن.");
+      }
     }
 
-    // عند تحميل الصفحة يرسل إشعار ترحيبي
+    function addSignalToList(message) {
+      const li = document.createElement("li");
+      li.innerHTML = message.replace(/\n/g, "<br>");
+      signalsList.prepend(li);
+
+      if (signalsList.children.length > 5) {
+        signalsList.removeChild(signalsList.lastChild);
+      }
+    }
+
+    function sendTradeSignal() {
+      const msg = "🚀 توصية جديدة:\nشراء BTC/USDT\nالهدف 1: 5%\nالهدف 2: 10%\nالهدف 3: 15%\n⏰ " + new Date().toLocaleString();
+      sendTelegramNotification(msg);
+    }
+
+    // إشعار أول عند فتح الصفحة
     window.onload = () => {
       sendTelegramNotification("✅ بوت ZidProfit متصل الآن ويستقبل إشعارات!");
     };
 
-    // زر إرسال توصية
-    function sendTradeSignal() {
-      const msg = "🚀 توصية جديدة:\nشراء BTC/USDT\nالهدف 1: 5%\nالهدف 2: 10%\nالهدف 3: 15%";
-      sendTelegramNotification(msg);
-    }
-  </script>
-
-  <!-- زر إرسال توصية -->
-  <button onclick="sendTradeSignal()">إرسال توصية</button>
-
-</body>
-</html>
-  <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ZidProfit توصيات</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background: #f7f7f7;
-      color: #222;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background: #f0b90b;
-      color: #fff;
-      padding: 1rem;
-      font-size: 1.4rem;
-      font-weight: bold;
-    }
-    .section {
-      margin: 1rem;
-      padding: 1rem;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    .btn {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 20px;
-      background: #f0b90b;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-    .btn:hover {
-      background: #d9a60b;
-    }
-  </style>
-</head>
-<body>
-  <header>🚀 ZidProfit - توصيات وتحليل العملات</header>
-
-  <div class="section">
-    <h2>📊 توصيات اليوم</h2>
-    <p id="signals">جارِ تحميل التوصيات...</p>
-  </div>
-
-  <div class="section">
-    <h2>🔥 العملات الرائجة</h2>
-    <p id="trending">جارِ تحميل العملات...</p>
-  </div>
-
-  <div class="section">
-    <button class="btn" onclick="subscribe()">تفعيل الإشعارات</button>
-  </div>
-
-  <!-- OneSignal SDK -->
-  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-  <script>
-    window.OneSignalDeferred = window.OneSignalDeferred || [];
-    OneSignalDeferred.push(async function(OneSignal) {
-      await OneSignal.init({
-        appId: "7b640974-f457-417d-a04c-fe82340664d0", // App ID الخاص بك
-      });
-
-      // ✅ تنبيه تجريبي عند فتح الموقع
-      OneSignal.Notifications.showNotification("👋 أهلاً بك في ZidProfit!", {
-        body: "سيتم إرسال توصيات العملات هنا.",
-        icon: "icon-192.png"
-      });
-    });
-
-    // زر لتفعيل الاشتراك
-    function subscribe() {
-      window.OneSignalDeferred.push(async function(OneSignal) {
-        await OneSignal.Notifications.requestPermission();
-        alert("تم تفعيل الإشعارات ✅");
-      });
-    }
-
-    // ⚡ محاكاة توصيات (لاحقاً نربط مع Binance)
-    const signals = [
-      "🚀 شراء BTC عند 27000 - الأهداف: 27200 / 27500 / 28000",
-      "🔥 شراء ETH عند 1700 - الأهداف: 1720 / 1750 / 1800",
-      "⚡ شراء BNB عند 220 - الأهداف: 225 / 230 / 240"
-    ];
-
-    document.getElementById("signals").innerText = signals.join("\n");
-
-    // عملات رائجة (تجريبية)
-    const trending = ["BTC", "ETH", "BNB", "SOL", "XRP"];
-    document.getElementById("trending").innerText = trending.join(" | ");
+    // إرسال توصية تلقائية كل 30 دقيقة (1800000 ms)
+    setInterval(() => {
+      sendTradeSignal();
+    }, 1800000);
   </script>
 </body>
 </html>
