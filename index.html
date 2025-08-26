@@ -1,6 +1,46 @@
 <!DOCTYPE html>
 <html lang="ar">
-<head>
+...
+  <!-- باقي محتوى صفحتك هنا -->
+
+  <!-- سكربت البوت -->
+  <script>
+    const BOT_TOKEN = "8173854325:AAErmQqCdsLA4oo953II_NKhnGKmq5219zI"; 
+    const CHAT_ID = "552699259";  
+
+    // دالة إرسال إشعار
+    function sendTelegramNotification(message) {
+      fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: CHAT_ID,
+          text: message
+        })
+      })
+      .then(res => res.json())
+      .then(data => console.log("📨 تم الإرسال:", data))
+      .catch(err => console.error("⚠️ خطأ:", err));
+    }
+
+    // عند تحميل الصفحة يرسل إشعار ترحيبي
+    window.onload = () => {
+      sendTelegramNotification("✅ بوت ZidProfit متصل الآن ويستقبل إشعارات!");
+    };
+
+    // زر إرسال توصية
+    function sendTradeSignal() {
+      const msg = "🚀 توصية جديدة:\nشراء BTC/USDT\nالهدف 1: 5%\nالهدف 2: 10%\nالهدف 3: 15%";
+      sendTelegramNotification(msg);
+    }
+  </script>
+
+  <!-- زر إرسال توصية -->
+  <button onclick="sendTradeSignal()">إرسال توصية</button>
+
+</body>
+</html>
+  <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ZidProfit توصيات</title>
